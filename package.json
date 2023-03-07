@@ -8,7 +8,7 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest --passWithNoTests src",
+    "test": "jest --passWithNoTests",
     "lint": "rome format src --write && rome check src",
     "prebuild": "rimraf dist && npm run lint",
     "build": "tsc",

@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+const xPosSchema = z
+  .number()
+  .describe("X Vector Position, x is directed to the north");
+
+const zPosSchema = z
+  .number()
+  .describe("Z Vector Position, z is directed to the east");
+
 const dateSchema = z.object({
   Year: z
     .number()
@@ -32,24 +40,30 @@ const windAtSchema = z.object({
   speed: z.number().default(0),
   dir: z.number().default(0),
 });
+
 const windSchema = z.object({
   at8000: windAtSchema.default(windAtSchema.parse({})),
   atGround: windAtSchema.default(windAtSchema.parse({})),
   at2000: windAtSchema.default(windAtSchema.parse({})),
 });
+
 const visibilitySchema = z
   .object({ distance: z.number().default(80000) })
   .default({});
+
 const haloSchema = z.object({ preset: z.string().default("auto") }).default({});
+
 const fogSchema = z
   .object({
     thickness: z.number().default(0),
     visibility: z.number().default(0),
   })
   .default({});
+
 const seasonSchema = z
   .object({ temperature: z.number().default(20) })
   .default({});
+
 const cloudsSchema = z
   .object({
     thickness: z.number().default(200),
@@ -59,6 +73,7 @@ const cloudsSchema = z
     iprecptns: z.number().default(0),
   })
   .default({});
+
 const weatherSchema = z
   .object({
     atmosphere_type: z.number().default(0),
@@ -104,6 +119,7 @@ const groundControlRoleSchema = z
     red: z.number().default(0),
   })
   .default({});
+
 const groundControlSchema = z
   .object({
     isPilotControlVehicles: z.boolean().default(false),
@@ -134,13 +150,85 @@ const coalitionsSchema = z
   })
   .default({});
 
+const planeUnitSchema = z.object({
+  alt: z.number().describe("Aircraft altitude in meters").default(2000),
+  y: zPosSchema,
+  x: xPosSchema,
+  type: z.string(),
+  onboard_num: z.string(),
+  alt_type: z.string().default("BARO"),
+  psi: z.number().default(0),
+  livery_id: z.string().default("default"),
+  skill: z.string().default("High"),
+  callsign: z.array(z.number()).length(3),
+  name: z.string(),
+  payload: z.object({
+    pylons: z.object({}),
+    fuel: z.number(),
+    flare: z.number(),
+    ammo_type: z.number(),
+    chaff: z.number(),
+    gun: z.number(),
+  }),
+  speed: z.number().describe("Aircraft speed in meters per second"),
+  heading: z.number().default(0),
+  AddPropAircraft: z.object({}).default({}),
+  unitId: z.number(),
+});
+
+const planeRoutePointSchema = z.object({
+  alt: z.number().default(2000),
+  type: z.string().default("Turning Point"),
+  action: z.string().default("Turning Point"),
+  alt_type: z.string().default("BARO"),
+  y: zPosSchema,
+  x: xPosSchema,
+  speed_locked: z.boolean(),
+  formation_template: z.string(),
+  speed: z.number(),
+  ETA_locked: z.boolean(),
+  task: z.object({
+    id: z.string(),
+    params: z.object({ tasks: z.object({}) }),
+  }),
+  ETA: z.number(),
+});
+
+const planeGroupSchema = z.object({
+  frequency: z.number().default(124),
+  modulation: z.number().default(0),
+  groupId: z.number(),
+  y: zPosSchema,
+  x: xPosSchema,
+  tasks: z.object({}).default({}),
+  route: z.object({
+    points: z.array(planeRoutePointSchema).default([]),
+  }),
+  hidden: z.boolean().default(false),
+  units: z.array(planeUnitSchema).min(1).max(4),
+  radioSet: z.boolean().default(false),
+  name: z.string(),
+  communication: z.boolean().default(true),
+  start_time: z.number().default(0),
+  task: z.string(),
+  uncontrolled: z.boolean().default(false),
+});
+
+const coalitionCountrySchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  plane: z.object({
+    group: z.array(planeGroupSchema).default([]),
+  }),
+});
+
 const coalitionSchema = z.object({
   bullseye: z
     .object({ y: z.number().default(0), x: z.number().default(0) })
     .default({}),
   nav_points: z.object({}).default({}),
   name: z.enum(["blue", "neutrals", "red"]),
-  country: z.object({}).default({}),
+  country: z.array(coalitionCountrySchema).default([]),
 });
 
 export const missionSchema = z.object({
@@ -182,9 +270,9 @@ export const missionSchema = z.object({
   goals: z.object({}).default({}),
   coalition: z
     .object({
-      blue: coalitionSchema,
-      neutrals: coalitionSchema,
-      red: coalitionSchema,
+      blue: coalitionSchema.default({ name: "blue" }),
+      neutrals: coalitionSchema.default({ name: "neutrals" }),
+      red: coalitionSchema.default({ name: "red" }),
     })
     .default({
       blue: { name: "blue" },
@@ -207,15 +295,12 @@ export const missionSchema = z.object({
     .default({}),
 });
 
-export type MissionProps = {
-  theatre: string;
-  descriptionNeutralsTask: string;
-  descriptionBlueTask: string;
-  descriptionRedTask: string;
-  descriptionText: string;
-  sortie: string;
-  maxDictId: number;
-};
-export const mission = (props: MissionProps) => {
-  return missionSchema.parse({ ...props });
-};
+export type MissionProps = z.input<typeof missionSchema>;
+export const mission = (props: MissionProps) => missionSchema.parse(props);
+
+export type PlaneProps = z.input<typeof planeUnitSchema>;
+export const plane = (props: PlaneProps) => planeUnitSchema.parse(props);
+
+export type PlaneGroupProps = z.input<typeof planeGroupSchema>;
+export const planeGroup = (props: PlaneGroupProps) =>
+  planeGroupSchema.parse(props);

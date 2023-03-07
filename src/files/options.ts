@@ -12,9 +12,5 @@ export const optionsSchema = z.object({
   views: z.object({}).default({}),
 });
 
-export type OptionsProps = {
-  playerName?: string;
-};
-export const options = ({ playerName }: OptionsProps) => {
-  return optionsSchema.parse({ playerName });
-};
+export type OptionsProps = z.input<typeof optionsSchema>;
+export const options = (props: OptionsProps) => optionsSchema.parse(props);

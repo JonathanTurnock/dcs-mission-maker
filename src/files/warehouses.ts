@@ -30,7 +30,6 @@ const warehousesSchema = z.object({
   warehouses: z.record(z.number(), z.object({})).default({}),
 });
 
-export type WarehousesProps = {};
-export const warehouses = (props: WarehousesProps) => {
-  return warehousesSchema.parse({});
-};
+export type WarehousesProps = z.input<typeof warehousesSchema>;
+export const warehouses = (props: WarehousesProps) =>
+  warehousesSchema.parse(props);

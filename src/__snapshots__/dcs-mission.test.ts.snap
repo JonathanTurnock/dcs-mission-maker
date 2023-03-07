@@ -72,7 +72,7 @@ exports[`given a simple empty mission should build a mission file 1`] = `
 	["pictureFileNameB"]=
 	{
 	},
-	["descriptionBlueTask"]="DictKey_descriptionBlueTask_2",
+	["descriptionBlueTask"]="DictKey_descriptionBlueTask_1",
 	["pictureFileNameN"]=
 	{
 	},
@@ -80,13 +80,13 @@ exports[`given a simple empty mission should build a mission file 1`] = `
 	["pictureFileNameR"]=
 	{
 	},
-	["descriptionRedTask"]="DictKey_descriptionRedTask_1",
+	["descriptionRedTask"]="DictKey_descriptionRedTask_2",
 	["theatre"]="Caucasus",
 	["failures"]=
 	{
 	},
 	["currentKey"]=1,
-	["maxDictId"]=0,
+	["maxDictId"]=5,
 	["weather"]=
 	{
 		["atmosphere_type"]=0,
@@ -346,6 +346,466 @@ exports[`given a simple empty mission should build a mission file 1`] = `
     "l10n/DEFAULT/dictionary",
     "dictionary = 
 {
+	["DictKey_descriptionText_0"]="",
+	["DictKey_descriptionBlueTask_1"]="",
+	["DictKey_descriptionRedTask_2"]="",
+	["DictKey_descriptionNeutralsTask_3"]="",
+	["DictKey_sortie_4"]=""
+}",
+  ],
+]
+`;
+
+exports[`given a simple mission with 1 plane group should build a mission file 1`] = `
+[
+  [
+    "options",
+    "options = 
+{
+	["playerName"]="New callsign",
+	["miscellaneous"]=
+	{
+	},
+	["difficulty"]=
+	{
+	},
+	["VR"]=
+	{
+	},
+	["graphics"]=
+	{
+	},
+	["plugins"]=
+	{
+	},
+	["format"]=1,
+	["sound"]=
+	{
+	},
+	["views"]=
+	{
+	}
+}",
+  ],
+  [
+    "l10n/DEFAULT/mapResource",
+    "mapResource = 
+{
+}",
+  ],
+  [
+    "warehouses",
+    "warehouses = 
+{
+	["airports"]=
+	{
+	},
+	["warehouses"]=
+	{
+	}
+}",
+  ],
+  [
+    "theatre",
+    "Caucasus",
+  ],
+  [
+    "mission",
+    "mission = 
+{
+	["requiredModules"]=
+	{
+	},
+	["date"]=
+	{
+		["Year"]=2016,
+		["Day"]=21,
+		["Month"]=6
+	},
+	["start_time"]=28800,
+	["sortie"]="DictKey_sortie_4",
+	["descriptionText"]="DictKey_descriptionText_0",
+	["pictureFileNameB"]=
+	{
+	},
+	["descriptionBlueTask"]="DictKey_descriptionBlueTask_1",
+	["pictureFileNameN"]=
+	{
+	},
+	["descriptionNeutralsTask"]="DictKey_descriptionNeutralsTask_3",
+	["pictureFileNameR"]=
+	{
+	},
+	["descriptionRedTask"]="DictKey_descriptionRedTask_2",
+	["theatre"]="Caucasus",
+	["failures"]=
+	{
+	},
+	["currentKey"]=1,
+	["maxDictId"]=5,
+	["weather"]=
+	{
+		["atmosphere_type"]=0,
+		["wind"]=
+		{
+			["at8000"]=
+			{
+				["speed"]=0,
+				["dir"]=0
+			},
+			["atGround"]=
+			{
+				["speed"]=0,
+				["dir"]=0
+			},
+			["at2000"]=
+			{
+				["speed"]=0,
+				["dir"]=0
+			}
+		},
+		["enable_fog"]=false,
+		["visibility"]=
+		{
+			["distance"]=80000
+		},
+		["halo"]=
+		{
+			["preset"]="auto"
+		},
+		["fog"]=
+		{
+			["thickness"]=0,
+			["visibility"]=0
+		},
+		["season"]=
+		{
+			["temperature"]=20
+		},
+		["type_weather"]=0,
+		["qnh"]=760,
+		["cyclones"]=
+		{
+		},
+		["name"]="Winter, clean sky",
+		["dust_density"]=0,
+		["modifiedTime"]=false,
+		["groundTurbulence"]=0,
+		["enable_dust"]=false,
+		["clouds"]=
+		{
+			["thickness"]=200,
+			["density"]=0,
+			["preset"]="Preset2",
+			["base"]=2500,
+			["iprecptns"]=0
+		}
+	},
+	["result"]=
+	{
+		["total"]=0,
+		["offline"]=
+		{
+			["conditions"]=
+			{
+			},
+			["actions"]=
+			{
+			},
+			["func"]=
+			{
+			}
+		},
+		["blue"]=
+		{
+			["conditions"]=
+			{
+			},
+			["actions"]=
+			{
+			},
+			["func"]=
+			{
+			}
+		},
+		["red"]=
+		{
+			["conditions"]=
+			{
+			},
+			["actions"]=
+			{
+			},
+			["func"]=
+			{
+			}
+		}
+	},
+	["groundControl"]=
+	{
+		["isPilotControlVehicles"]=false,
+		["passwords"]=
+		{
+			["artillery_commander"]=
+			{
+			},
+			["instructor"]=
+			{
+			},
+			["forward_observer"]=
+			{
+			},
+			["observer"]=
+			{
+			}
+		},
+		["roles"]=
+		{
+			["artillery_commander"]=
+			{
+				["blue"]=0,
+				["neutrals"]=0,
+				["red"]=0
+			},
+			["instructor"]=
+			{
+				["blue"]=0,
+				["neutrals"]=0,
+				["red"]=0
+			},
+			["forward_observer"]=
+			{
+				["blue"]=0,
+				["neutrals"]=0,
+				["red"]=0
+			},
+			["observer"]=
+			{
+				["blue"]=0,
+				["neutrals"]=0,
+				["red"]=0
+			}
+		}
+	},
+	["map"]=
+	{
+		["centerY"]=618000,
+		["zoom"]=1000000,
+		["centerX"]=-355000
+	},
+	["coalitions"]=
+	{
+		["blue"]=
+		{
+			[1]=80
+		},
+		["neutrals"]=
+		{
+		},
+		["red"]=
+		{
+		}
+	},
+	["triggers"]=
+	{
+		["zones"]=
+		{
+		}
+	},
+	["version"]=1,
+	["goals"]=
+	{
+	},
+	["coalition"]=
+	{
+		["blue"]=
+		{
+			["bullseye"]=
+			{
+				["y"]=0,
+				["x"]=0
+			},
+			["nav_points"]=
+			{
+			},
+			["name"]="blue",
+			["country"]=
+			{
+				[1]=
+				{
+					["id"]=80,
+					["name"]="CJTF Blue",
+					["plane"]=
+					{
+						["group"]=
+						{
+							[1]=
+							{
+								["frequency"]=124,
+								["modulation"]=0,
+								["groupId"]=1,
+								["y"]=632449.86255341,
+								["x"]=-297153.83834764,
+								["tasks"]=
+								{
+								},
+								["route"]=
+								{
+									["points"]=
+									{
+										[1]=
+										{
+											["alt"]=2000,
+											["type"]="Turning Point",
+											["action"]="Turning Point",
+											["alt_type"]="BARO",
+											["y"]=632449.86255341,
+											["x"]=-297153.83834764,
+											["speed_locked"]=true,
+											["formation_template"]="",
+											["speed"]=154.16666666667,
+											["ETA_locked"]=true,
+											["task"]=
+											{
+												["id"]="ComboTask",
+												["params"]=
+												{
+													["tasks"]=
+													{
+													}
+												}
+											},
+											["ETA"]=0
+										}
+									}
+								},
+								["hidden"]=false,
+								["units"]=
+								{
+									[1]=
+									{
+										["alt"]=2000,
+										["y"]=635588.6,
+										["x"]=-292598.45714286,
+										["type"]="A-10A",
+										["onboard_num"]="010",
+										["alt_type"]="BARO",
+										["psi"]=0,
+										["livery_id"]="default",
+										["skill"]="High",
+										["callsign"]=
+										{
+											[1]=1,
+											[2]=1,
+											[3]=1
+										},
+										["name"]="Aerial-1-1",
+										["payload"]=
+										{
+											["pylons"]=
+											{
+											},
+											["fuel"]=5029,
+											["flare"]=120,
+											["ammo_type"]=1,
+											["chaff"]=240,
+											["gun"]=100
+										},
+										["speed"]=123.33333333333,
+										["heading"]=0,
+										["AddPropAircraft"]=
+										{
+										},
+										["unitId"]=1
+									}
+								},
+								["radioSet"]=false,
+								["name"]="Aerial-1",
+								["communication"]=true,
+								["start_time"]=0,
+								["task"]="CAS",
+								["uncontrolled"]=false
+							}
+						}
+					}
+				}
+			}
+		},
+		["neutrals"]=
+		{
+			["bullseye"]=
+			{
+				["y"]=0,
+				["x"]=0
+			},
+			["nav_points"]=
+			{
+			},
+			["name"]="neutrals",
+			["country"]=
+			{
+			}
+		},
+		["red"]=
+		{
+			["bullseye"]=
+			{
+				["y"]=0,
+				["x"]=0
+			},
+			["nav_points"]=
+			{
+			},
+			["name"]="red",
+			["country"]=
+			{
+			}
+		}
+	},
+	["trigrules"]=
+	{
+	},
+	["forcedOptions"]=
+	{
+	},
+	["trig"]=
+	{
+		["custom"]=
+		{
+		},
+		["customStartup"]=
+		{
+		},
+		["events"]=
+		{
+		},
+		["func"]=
+		{
+		},
+		["flag"]=
+		{
+		},
+		["conditions"]=
+		{
+		},
+		["actions"]=
+		{
+		},
+		["funcStartup"]=
+		{
+		}
+	}
+}",
+  ],
+  [
+    "l10n/DEFAULT/dictionary",
+    "dictionary = 
+{
+	["DictKey_descriptionText_0"]="",
+	["DictKey_descriptionBlueTask_1"]="",
+	["DictKey_descriptionRedTask_2"]="",
+	["DictKey_descriptionNeutralsTask_3"]="",
+	["DictKey_sortie_4"]=""
 }",
   ],
 ]
