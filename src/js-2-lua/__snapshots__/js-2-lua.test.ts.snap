@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`js2Lua should convert array to indexed keys with square brackets 1`] = `
+"
+{
+	[1]=
+	{
+		["id"]=21,
+		["name"]="Australia"
+	},
+	[2]=
+	{
+		["id"]=15,
+		["name"]="Israel"
+	}
+}"
+`;
+
+exports[`js2Lua should convert objects to key with square brackets 1`] = `
+"
+{
+	["x"]=-291014,
+	["y"]=617414
+}"
+`;
+
+exports[`js2Lua should convert objects to key with square brackets 2`] = `
+"
+{
+	["id"]=21,
+	["name"]="Australia"
+}"
+`;

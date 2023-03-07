@@ -1,0 +1,31 @@
+{
+  "name": "dcs-mission-maker",
+  "version": "1.0.0",
+  "description": "Javascript Library for Producing DCS Mission Files (.miz)",
+  "license": "MIT",
+  "keywords": [
+    "dcs"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests src",
+    "lint": "rome format src --write && rome check src",
+    "prebuild": "rimraf dist && npm run lint",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "lodash": "^4.17.21",
+    "typescript": "^4.9.5",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.191",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.4",
+    "rimraf": "^4.3.1",
+    "rome": "^11.0.0",
+    "ts-jest": "^29.0.5"
+  }
+}
