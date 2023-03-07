@@ -34,17 +34,19 @@ You can customize the mission by passing additional options to the DcsMission co
 For more information on the available options and methods, please see the documentation provided with the class.
 
 ## Contributing
+
 If you'd like to contribute to this project, please feel free to fork the repository and submit a pull request.
 
 ### Expanding Schemas
 
 To make a new Zod Schema first create the construct in the ME, (Place units, add waypoints etc)
 
-Unzip the Mission File and copy the code block to DCS Fiddle.
+Unzip the Mission File and copy the lua table to DCS Fiddle.
 
 > https://dcsfiddle.pages.dev/
 
-Immediately return the code inline and then use the following website to convert the JSON to a zod schema.
+Immediately return the table inline which will convert it to JSON for you, 
+then use the following website to convert the JSON to a zod schema.
 
 > https://transform.tools/json-to-zod
 
