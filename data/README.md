@@ -8,5 +8,5 @@ The `me_db.bundle.json` exists so you can browse its data using https://jsonhero
 
 Paste the link to the data file to explore
 
-> https://jsonhero.io/ 
+> https://jsonhero.io/   
 > https://raw.githubusercontent.com/JonathanTurnock/dcs-mission-maker/master/data/me_db.bundle.json
