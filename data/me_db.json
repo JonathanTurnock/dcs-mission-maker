@@ -1,0 +1,11 @@
+{
+  "callnames": {
+    "$ref": "./callnames/callnames.json"
+  },
+  "helos": {
+    "$ref": "./helos/helos.json"
+  },
+  "planes": {
+    "$ref": "./planes/planes.json"
+  }
+}

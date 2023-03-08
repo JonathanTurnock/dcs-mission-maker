@@ -13,7 +13,7 @@ describe("when generating a plane group", () => {
           points: [],
         },
         units: [],
-      })
+      }),
     ).toThrowErrorMatchingInlineSnapshot(`
       "[
         {
@@ -83,7 +83,7 @@ describe("when generating a plane group", () => {
             unitId: 1,
           }),
         ],
-      })
+      }),
     ).toEqual({
       frequency: 124,
       modulation: 0,

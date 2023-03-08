@@ -10,7 +10,7 @@ describe("when generating a mission", () => {
         descriptionBlueTask: "DictKey_descriptionBlueTask_3",
         descriptionNeutralsTask: "DictKey_descriptionNeutralsTask_4",
         descriptionRedTask: "DictKey_descriptionRedTask_2",
-      })
+      }),
     ).toThrowErrorMatchingInlineSnapshot(`
       "[
         {
@@ -35,7 +35,7 @@ describe("when generating a mission", () => {
         descriptionBlueTask: "DictKey_descriptionBlueTask_3",
         descriptionNeutralsTask: "DictKey_descriptionNeutralsTask_4",
         descriptionRedTask: "DictKey_descriptionRedTask_2",
-      })
+      }),
     ).toEqual({
       requiredModules: {},
       date: {
