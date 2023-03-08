@@ -4,6 +4,8 @@ This project provides a JavaScript class that can be used to manage the creation
 
 The primary use case is validation, this project holds lots of zod schemas for the mission file ensuring generated mission files conform to the DCS models.
 
+It also exposes cherry-picked information from the mission editor database accessible in the `ME_DB` constant. 
+
 ## Installation
 
 To install this package, you can use npm:
@@ -46,6 +48,17 @@ Add new scripts and JSON files then expose them in the `.datarc.yml` file
 > https://github.com/JonathanTurnock/dcs-global-terrain-database
 > 
 > It's an external library as it's not always required
+
+### Exploring
+An `me_db.bundle.json` exists so you can browse its data using https://jsonhero.io/
+
+Head to 
+
+> https://jsonhero.io/
+
+Paste the following link to explore the bundle
+
+> https://raw.githubusercontent.com/JonathanTurnock/dcs-mission-maker/master/data/me_db.bundle.json
 
 ### Planes
 
