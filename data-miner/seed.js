@@ -6,7 +6,7 @@ const glob = require("glob");
 const { basename, extname } = require("path");
 const axios = require("axios");
 const { readFileSync } = require("fs-extra");
-const { DB_NAME, MONGO_URL, ENVS, PROCESS, FILES } = require("./config");
+const { DB_NAME, MONGO_URL, ENVS, FILES } = require("./config");
 
 const debug = require("debug")("me_db:seed");
 
