@@ -4,9 +4,12 @@ This project spins up a local MongoDB using docker and when `seed.js` is run it 
 
 You must have DCS Fiddle setup and verified its working before this works as it uses the same HTTP endpoint.
 
-You should confirm that you can connect to the `GUI` env with DCS Running before runing this script.
+You should confirm that you can connect to the `GUI` env with DCS Running before running this script.
 
 `https://dcsfiddle.pages.dev/`
+
+NOTE: Some exporters also require a mission to be running (i.e. Terrain), these will fail and notify 
+in the console but be aware any conections to the `MISSION` environment WILL fail unless a mission is running.
 
 ## _id, @created and @dcsversion
 
@@ -35,7 +38,6 @@ Projecting is the act of specifying how much of the matched document you want re
 MongoDB also supports Mapping from one table to another to join data.
 
 > TBC IMG
-
 
 #### Starting
 

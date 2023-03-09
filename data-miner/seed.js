@@ -6,7 +6,7 @@ const glob = require("glob");
 const { basename, extname } = require("path");
 const axios = require("axios");
 const { readFileSync } = require("fs-extra");
-const { DB_NAME, MONGO_URL } = require("./config");
+const { DB_NAME, MONGO_URL, ENVS, PROCESS, FILES } = require("./config");
 
 const debug = require("debug")("me_db:seed");
 
@@ -28,7 +28,7 @@ const populateCollection =
     await Aigle.eachSeries(data, async (value, _) => {
       const signed = sign(value, dcsVersion);
       try {
-        await collection.insertOne(signed);
+        await collection.insertOne(signed); // TODO: Use Bulk Insert
       } catch (e) {
         debug(e.message);
       }
@@ -46,24 +46,33 @@ async function run() {
     .then((it) => it.data.result);
   console.log("DCS Connection OK");
 
-  console.log("Populating Mission Editor DB");
+  console.log("Extracting information from DCS");
   const collections = await Aigle.mapSeries(
-    await glob("./tables/*.lua"),
+    await glob(FILES),
     async (_path) => {
       console.log(`Processing ${_path}`);
       const exportScript = readFileSync(_path, "utf-8");
+      const [_, target, env] = exportScript.match(/^.*?(GUI|MISSION):(\w*)\n/);
       const name = basename(_path).replace(extname(_path), "");
+      const baseURL = ENVS[target];
+
       const data = await axios
-        .get(`http://127.0.0.1:12081/${btoa(exportScript)}?env=default`)
+        .get(`/${btoa(exportScript)}`, { baseURL, params: { env } })
         .then((it) => it.data.result)
         .catch((e) => {
-          console.error(e.message);
-          process.exit(1);
+          if (e.code === "ECONNREFUSED") {
+            console.info(
+              `Failed to connect to the target environment ${target}:${env} while processing ${_path}, please investigate further using DCS Fiddle`
+            );
+          } else {
+            console.error(e.message);
+          }
         });
       return { name, data };
     }
   );
 
+  console.log("Populating Mission Editor DB");
   await Aigle.eachSeries(collections, populateCollection(dcsVersion));
 
   console.log("Populated Mission Editor DB");
