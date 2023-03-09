@@ -26,11 +26,11 @@ MongoDB is a document store, it allows you to `filter` data and also `project` r
 
 Filtering is the act of writing a query to get a subset of results.
 
-> TBC IMG
+![img.png](img.png)
 
 Projecting is the act of specifying how much of the matched document you want returned.
 
-> TBC IMG
+![img_1.png](img_1.png)
 
 MongoDB also supports Mapping from one table to another to join data.
 

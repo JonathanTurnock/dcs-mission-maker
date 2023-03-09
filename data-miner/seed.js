@@ -6,7 +6,7 @@ const glob = require("glob");
 const { basename, extname } = require("path");
 const axios = require("axios");
 const { readFileSync } = require("fs-extra");
-const {DB_NAME, MONGO_URL} = require("./config");
+const { DB_NAME, MONGO_URL } = require("./config");
 
 const debug = require("debug")("me_db:seed");
 
@@ -20,21 +20,20 @@ const sign = (obj, dcsVersion) => {
   return obj;
 };
 
-const populateCollection = (dcsVersion) => async (collectionName) => {
-  const collection = await meDb.collection(collectionName);
-  const collectionValues = get(data, collectionName);
+const populateCollection =
+  (dcsVersion) =>
+  async ({ name, data }) => {
+    const collection = await meDb.collection(name);
 
-  await Aigle.eachSeries(collectionValues, async (value, _) => {
-    const signed = sign(value, dcsVersion);
-    try {
-      await collection.insertOne(signed);
-    } catch (e) {
-      debug(e.message);
-    }
-  });
-};
-
-
+    await Aigle.eachSeries(data, async (value, _) => {
+      const signed = sign(value, dcsVersion);
+      try {
+        await collection.insertOne(signed);
+      } catch (e) {
+        debug(e.message);
+      }
+    });
+  };
 
 async function run() {
   console.log("Validating Mongo Connection");
@@ -42,7 +41,9 @@ async function run() {
   console.log("Mongo Connection OK");
 
   console.log("Validating DCS Connection");
-  const dcsVersion = await axios.get(`http://127.0.0.1:12081/${btoa("return true")}?env=default`).then(it => it.data.result)
+  const dcsVersion = await axios
+    .get(`http://127.0.0.1:12081/${btoa("return true")}?env=default`)
+    .then((it) => it.data.result);
   console.log("DCS Connection OK");
 
   console.log("Populating Mission Editor DB");
@@ -54,7 +55,11 @@ async function run() {
       const name = basename(_path).replace(extname(_path), "");
       const data = await axios
         .get(`http://127.0.0.1:12081/${btoa(exportScript)}?env=default`)
-        .then((it) => it.data.result);
+        .then((it) => it.data.result)
+        .catch((e) => {
+          console.error(e.message);
+          process.exit(1);
+        });
       return { name, data };
     }
   );
