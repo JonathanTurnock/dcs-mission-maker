@@ -42,7 +42,7 @@ async function run() {
 
   console.log("Validating DCS Connection");
   const dcsVersion = await axios
-    .get(`http://127.0.0.1:12081/${btoa("return true")}?env=default`)
+    .get(`http://127.0.0.1:12081/${btoa("return _APP_VERSION")}?env=default`)
     .then((it) => it.data.result);
   console.log("DCS Connection OK");
 
