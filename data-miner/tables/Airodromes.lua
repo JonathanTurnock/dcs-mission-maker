@@ -7,7 +7,8 @@ end
 
 local airodromes = terrain.GetTerrainConfig("Airdromes") -- this returns a class 
 
-for _, v in ipairs(airodromes) do -- this currently doesn't work :/
+for k, v in ipairs(airodromes) do -- this currently doesn't work :/
+    v["DCSID"] = k
     v["theatre"] = DCS.getTheatreID()
 end
 
