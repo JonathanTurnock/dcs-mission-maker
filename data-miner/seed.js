@@ -6,7 +6,8 @@ const glob = require("glob");
 const { basename, extname } = require("path");
 const axios = require("axios");
 const { readFileSync } = require("fs-extra");
-const { DB_NAME, MONGO_URL, ENVS, FILES } = require("./config");
+const { DB_NAME, MONGO_URL, ENVS, FILES, VIEWS } = require("./config");
+const { pipeline } = require("stream");
 
 const debug = require("debug")("me_db:seed");
 
@@ -23,11 +24,12 @@ const sign = (obj, dcsVersion) => {
 const populateCollection =
   (dcsVersion) =>
   async ({ name, data }) => {
+    console.log(`Adding ${name} to DB`)
     const collection = await meDb.collection(name);
 
     await Aigle.eachSeries(data, async (value, _) => {
-      const signed = sign(value, dcsVersion);
       try {
+        const signed = sign(value, dcsVersion);
         // use upsert to avoid duplication when running more than once (Eg more than one theater)
         await collection.updateOne({ _id: signed._id, '@dcsversion': signed['@dcsversion']  }, {$set: signed }, { upsert: true }); // TODO: Use Bulk Insert
       } catch (e) {
@@ -77,6 +79,14 @@ async function run() {
   await Aigle.eachSeries(collections, populateCollection(dcsVersion));
 
   console.log("Populated Mission Editor DB");
+
+  console.log("Creating Views")
+  await Aigle.eachSeries(await glob(VIEWS),  async (_path) => {
+    const {pipeline, collection, name} = require("./"+_path.replace("\\", "/"))
+    console.log(`Adding View ${name}`)
+    await meDb.command( { create: name, viewOn: collection, pipeline  });
+  });
+  console.log("Created Views")
 
   await mongo.close();
 }
