@@ -1,4 +1,19 @@
 --- MISSION:default
+
+
+function generalPosObj(DCSpos)
+    lat, lon, alt = coord.LOtoLL(DCSpos)
+    return {
+        ['DCS'] = DCSpos,
+        ['World'] = {
+            ['lat'] = lat,
+            ['lon'] = lon,
+            ['alt'] = alt
+        }
+    }
+end
+
+
 local reverse_category = {}
 
 for k,v in pairs(Airbase.Category) do
@@ -32,9 +47,12 @@ for k,v in pairs(world.getAirbases()) do
 
     airbase["runways"] = v:getRunways()
     airbase["parking"] = v:getParking()
+    airbase["theatre"] = env.mission.theatre
+    airbase["pos"] = generalPosObj(v:getPoint())
 
     for _k,_v in pairs(airbase.parking) do
         _v.Term_Type_Name = term_type[_v.Term_Type]
+        _v.pos = generalPosObj(_v.vTerminalPos)
     end
 
     table.insert(airbases, airbase)
