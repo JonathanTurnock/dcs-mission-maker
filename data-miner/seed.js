@@ -28,7 +28,8 @@ const populateCollection =
     await Aigle.eachSeries(data, async (value, _) => {
       const signed = sign(value, dcsVersion);
       try {
-        await collection.insertOne(signed); // TODO: Use Bulk Insert
+        // use upsert to avoid duplication when running more than once (Eg more than one theater)
+        await collection.updateOne({ _id: signed._id, '@dcsversion': signed['@dcsversion']  }, {$set: signed }, { upsert: true }); // TODO: Use Bulk Insert
       } catch (e) {
         debug(e.message);
       }
