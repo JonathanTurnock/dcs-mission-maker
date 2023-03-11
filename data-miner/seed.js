@@ -52,7 +52,7 @@ async function run() {
     async (_path) => {
       console.log(`Processing ${_path}`);
       const exportScript = readFileSync(_path, "utf-8");
-      const [_, target, env] = exportScript.match(/^.*?(GUI|MISSION):(\w*)\n/);
+      const [_, target, env] = exportScript.match(/^.*?(GUI|MISSION):(\w*)/);
       const name = basename(_path).replace(extname(_path), "");
       const baseURL = ENVS[target];
 
