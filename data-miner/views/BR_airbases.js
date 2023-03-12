@@ -26,7 +26,7 @@ const pipeline = [
       from: "Beacons",
       localField: "raw.beacons.beaconId",
       foreignField: "beaconId",
-      as: "becons",
+      as: "beacons",
     },
   },
   {
@@ -34,12 +34,10 @@ const pipeline = [
       airdromeData: {
         runways: {
           $map: {
-            input: {
-              $objectToArray: "$raw.runways",
-            },
+            input: "$raw.runways",
             as: "run",
             in: {
-              name: "$$run.v.name",
+              name: "$$run.name",
             },
           },
         },
@@ -48,7 +46,7 @@ const pipeline = [
           $map: {
             input: {
               $filter: {
-                input: "$becons",
+                input: "$beacons",
                 as: "be",
                 cond: {
                   $eq: ["$$be.type_name", "TACAN"],
@@ -63,7 +61,7 @@ const pipeline = [
           $map: {
             input: {
               $filter: {
-                input: "$becons",
+                input: "$beacons",
                 as: "be",
                 cond: {
                   $eq: ["$$be.type_name", "ILS_GLIDESLOPE"],
@@ -102,7 +100,7 @@ const pipeline = [
     $unset: [
       "raw",
       "radio",
-      "becons",
+      "beacons",
       "attributes",
       "category_name",
       "life",
