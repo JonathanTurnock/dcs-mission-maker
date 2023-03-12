@@ -30,9 +30,7 @@ const pipeline = [
         'airdromeData': {
           'runways': {
             '$map': {
-              'input': {
-                '$objectToArray': '$raw.runways'
-              }, 
+              'input':'$raw.runways',
               'as': 'run', 
               'in': {
                 'name': '$$run.v.name'
