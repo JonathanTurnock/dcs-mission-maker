@@ -101,12 +101,20 @@ const pipeline = [
       'airdromeData': {
         'runways': {
           '$map': {
-            'input': '$raw.runways',
+            'input': {
+              '$ifNull': [
+                '$raw.runways', []
+              ]
+            },
             'as': 'run',
             'in': '$$run.name'
           }
         },
-        'ATC': '$radio.frequency',
+        'ATC': {
+          '$ifNull': [
+            '$radio.frequency', []
+          ]
+        },
         'TACAN': {
           '$map': {
             'input': {
@@ -153,7 +161,11 @@ const pipeline = [
       'airdromeData': {
         'ATC': {
           '$map': {
-            'input': '$airdromeData.ATC',
+            'input': {
+              '$ifNull': [
+                '$airdromeData.ATC', []
+              ]
+            },
             'as': 'atc',
             'in': {
               '$arrayElemAt': [
