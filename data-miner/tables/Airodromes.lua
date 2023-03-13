@@ -1,18 +1,17 @@
 --- GUI:default
--- Guard against mission not loaded
+-- Guard against mission not loaded (Mission must be running for this to work)
 if (DCS.getTheatreID() == nil) then
-    console.warning("WARNING: Not in mission can't extact Airdromes")
     return {}
 end
 
-local airodromes = terrain.GetTerrainConfig("Airdromes") -- this returns a class 
+local airodromes = terrain.GetTerrainConfig("Airdromes")
 
-for k, v in pairs(airodromes) do -- this currently doesn't work :/
+local _airodromes_list = {}
+
+for k, v in pairs(airodromes) do
     v["airbase_id"] = k
     v["theatre"] = DCS.getTheatreID()
+    table.insert(_airodromes_list, v)
 end
 
-return airodromes
-
-
-
+return _airodromes_list

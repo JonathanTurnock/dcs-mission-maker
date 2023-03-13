@@ -45,8 +45,20 @@ for k,v in pairs(world.getAirbases()) do
 
     airbase["category_name"] = reverse_category[airbase.category]
 
-    airbase["runways"] = v:getRunways()
-    airbase["parking"] = v:getParking()
+    airbase["runways"] = {}
+
+    for _k,_v in pairs(v:getRunways()) do
+        _v["id"] = _k
+        table.insert(airbase["runways"], _v)
+    end
+
+    airbase["parking"] = {}
+
+    for _k,_v in pairs(v:getParking()) do
+        _v["id"] = _k
+        table.insert(airbase["parking"], _v)
+    end
+
     airbase["theatre"] = env.mission.theatre
     airbase["pos"] = generalPosObj(v:getPoint())
 
