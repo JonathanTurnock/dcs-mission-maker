@@ -36,7 +36,11 @@ const pipeline = [
     '$lookup': {
       'from': 'Radios',
       'let': {
-        'id': '$raw.radio',
+        'id': {
+          '$ifNull': [
+            '$raw.radio', []
+          ]
+        },
         'theatre': '$theatre'
       },
       'pipeline': [
@@ -45,7 +49,7 @@ const pipeline = [
             '$expr': {
               '$and': [
                 {
-                  '$eq': [
+                  '$in': [
                     '$radioId', '$$id'
                   ]
                 }, {
@@ -64,7 +68,11 @@ const pipeline = [
     '$lookup': {
       'from': 'Beacons',
       'let': {
-        'id': '$raw.beacons.beaconId',
+        'id': {
+          '$ifNull': [
+            '$raw.beacons.beaconId', []
+          ]
+        },
         'theatre': '$theatre'
       },
       'pipeline': [
@@ -73,7 +81,7 @@ const pipeline = [
             '$expr': {
               '$and': [
                 {
-                  '$eq': [
+                  '$in': [
                     '$beaconId', '$$id'
                   ]
                 }, {
@@ -95,9 +103,7 @@ const pipeline = [
           '$map': {
             'input': '$raw.runways',
             'as': 'run',
-            'in': {
-              'name': '$$run.name'
-            }
+            'in': '$$run.name'
           }
         },
         'ATC': '$radio.frequency',
