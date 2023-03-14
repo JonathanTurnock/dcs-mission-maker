@@ -9,7 +9,6 @@ local radios = terrain.getRadio()
 
 for _, v in ipairs(radios) do
     v["theatre"] = DCS.getTheatreID()
-    v["test"] = "test"
 end
 
 return radios
