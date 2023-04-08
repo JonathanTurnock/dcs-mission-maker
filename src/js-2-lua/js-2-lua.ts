@@ -26,7 +26,7 @@ export const js2Lua = (data: any, depth = 0): string => {
   }
 
   if (isString(data)) {
-    return `"${data}"`;
+    return JSON.stringify(data);
   }
 
   return `${data}`;
