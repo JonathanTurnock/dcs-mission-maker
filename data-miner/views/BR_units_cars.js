@@ -2,7 +2,7 @@ const pipeline = [
   {
     '$project': {
       'type': 1,
-      'DisplayName': 1,
+      'displayName': '$DisplayName',
       'category': 1,
       'paintSchemes': 1
     }

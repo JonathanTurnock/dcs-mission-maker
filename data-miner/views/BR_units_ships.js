@@ -2,8 +2,8 @@ const pipeline = [
   {
     '$project': {
       'type': 1,
-      'DisplayName': 1,
-      'Categories': 1
+      'displayName': '$DisplayName',
+      'categories': '$Categories',
     }
   }, {
     '$lookup': {

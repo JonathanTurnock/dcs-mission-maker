@@ -2,9 +2,9 @@ const pipeline = [
   {
     '$project': {
       'type': 1,
-      'DisplayName': 1,
-      'Categories': 1,
-      'Tasks': 1,
+      'displayName': '$DisplayName',
+      'categories': '$Categories',
+      'tasks': '$Tasks',
       'paintSchemes': 1,
       'payloadPresets': 1,
       'EPLRS': 1,
@@ -19,8 +19,8 @@ const pipeline = [
         'modulation': '$HumanRadio.modulation',
       },
       'ammoType': '$ammo_type_default',
-      'InheriteCommonCallnames': 1,
-      'SpecificCallnames': 1,
+      'inheriteCommonCallnames': '$InheriteCommonCallnames',
+      'specificCallnames': '$SpecificCallnames',
       'maxAlt': '$H_stat_max',
       'cruiseSpeed': '$V_max_cruise'
     }
