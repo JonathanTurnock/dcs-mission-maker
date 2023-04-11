@@ -15,10 +15,10 @@ const pipeline = [
   }, {
     '$project': {
       'type': 1,
-      'DisplayName': 1,
-      'Categories': 1,
-      'Countries': '$Countries.Name',
-      'CountriesWorldID': '$Countries.WorldID'
+      'displayName': 1,
+      'categories': 1,
+      'countries': '$Countries.Name',
+      'countriesWorldID': '$Countries.WorldID'
     }
   }
 ]

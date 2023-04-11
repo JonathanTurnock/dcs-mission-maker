@@ -43,7 +43,10 @@ const pipeline = [
       'fuel': 1,
       'flares': 1,
       'chaff': 1,
-      'extraProps': 1,
+      'extraProps': {
+        'id': 1,
+        'defValue': 1,
+      },
       'panelRadio': 1,
       'playable': 1,
       'radio': 1,
