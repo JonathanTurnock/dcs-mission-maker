@@ -4,6 +4,7 @@ const pipeline = [
       'type': 1,
       'displayName': '$DisplayName',
       'categories': '$Categories',
+      'module': '$_origin',
     }
   }, {
     '$lookup': {
@@ -17,6 +18,7 @@ const pipeline = [
       'type': 1,
       'displayName': 1,
       'categories': 1,
+      'module': 1,
       'countries': '$Countries.Name',
       'countriesWorldID': '$Countries.WorldID'
     }
