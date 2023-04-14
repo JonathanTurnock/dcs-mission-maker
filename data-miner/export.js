@@ -18,6 +18,7 @@ async function run() {
         const data = await cursor.toArray()
         fs.writeFileSync(`./${value}.json`, JSON.stringify(data, null, 4))
     }
+    await mongo.close();
 }
 
 run();
