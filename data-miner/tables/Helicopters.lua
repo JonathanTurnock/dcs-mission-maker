@@ -14,7 +14,7 @@ for k, v in pairs(units) do
             for k, v in ipairs(liveriesData) do
                 table.insert(sub_scheme, v[2])
             end
-            schemes[cv.WorldID] = sub_scheme
+            schemes[tostring(cv.WorldID)] = sub_scheme
         end
 
     end
