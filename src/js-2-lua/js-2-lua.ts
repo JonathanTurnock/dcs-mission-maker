@@ -1,4 +1,4 @@
-import { isArray, isEmpty, isObject, isString, map, range } from "lodash";
+import { forOwn, isArray, isEmpty, isObject, isString, range } from "lodash";
 
 export const js2Lua = (data: any, depth = 0): string => {
   const indentation = range(0, depth + 1)
@@ -18,11 +18,16 @@ export const js2Lua = (data: any, depth = 0): string => {
     if (isEmpty(data)) {
       return `\n${indentation}{\n${indentation}}`;
     }
-    return `\n${indentation}{\n${map(
-      data,
-      (value, key) =>
-        `${indentation}\t[${js2Lua(key)}]=${js2Lua(value, depth + 1)}`,
-    ).join(",\n")}\n${indentation}}`;
+    let str: string[] = [];
+    // Don't use loadsh map as some objects can have "length: 0"
+    forOwn(data, (value, key) =>
+      str.push(`${indentation}\t[${js2Lua(key)}]=${js2Lua(value, depth + 1)}`),
+    );
+    return `\n${indentation}{\n${str.join(",\n")}\n${indentation}}`;
+  }
+
+  if (typeof data === "number") {
+    return data.toString();
   }
 
   if (isString(data)) {

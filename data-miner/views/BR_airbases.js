@@ -1,186 +1,177 @@
 const pipeline = [
   {
-    '$lookup': {
-      'from': 'Airodromes',
-      'let': {
-        'id': '$ID',
-        'theatre': '$theatre'
+    $lookup: {
+      from: "Airodromes",
+      let: {
+        id: "$ID",
+        theatre: "$theatre",
       },
-      'pipeline': [
+      pipeline: [
         {
-          '$match': {
-            '$expr': {
-              '$and': [
+          $match: {
+            $expr: {
+              $and: [
                 {
-                  '$eq': [
-                    '$airbase_id', '$$id'
-                  ]
-                }, {
-                  '$eq': [
-                    '$theatre', '$$theatre'
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      ],
-      'as': 'raw'
-    }
-  }, {
-    '$unwind': {
-      'path': '$raw',
-      'preserveNullAndEmptyArrays': true
-    }
-  }, {
-    '$lookup': {
-      'from': 'Radios',
-      'let': {
-        'id': {
-          '$ifNull': [
-            '$raw.radio', []
-          ]
+                  $eq: ["$airbase_id", "$$id"],
+                },
+                {
+                  $eq: ["$theatre", "$$theatre"],
+                },
+              ],
+            },
+          },
         },
-        'theatre': '$theatre'
+      ],
+      as: "raw",
+    },
+  },
+  {
+    $unwind: {
+      path: "$raw",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $lookup: {
+      from: "Radios",
+      let: {
+        id: {
+          $ifNull: ["$raw.radio", []],
+        },
+        theatre: "$theatre",
       },
-      'pipeline': [
+      pipeline: [
         {
-          '$match': {
-            '$expr': {
-              '$and': [
+          $match: {
+            $expr: {
+              $and: [
                 {
-                  '$in': [
-                    '$radioId', '$$id'
-                  ]
-                }, {
-                  '$eq': [
-                    '$theatre', '$$theatre'
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      ],
-      'as': 'radio'
-    }
-  }, {
-    '$lookup': {
-      'from': 'Beacons',
-      'let': {
-        'id': {
-          '$ifNull': [
-            '$raw.beacons.beaconId', []
-          ]
+                  $in: ["$radioId", "$$id"],
+                },
+                {
+                  $eq: ["$theatre", "$$theatre"],
+                },
+              ],
+            },
+          },
         },
-        'theatre': '$theatre'
+      ],
+      as: "radio",
+    },
+  },
+  {
+    $lookup: {
+      from: "Beacons",
+      let: {
+        id: {
+          $ifNull: ["$raw.beacons.beaconId", []],
+        },
+        theatre: "$theatre",
       },
-      'pipeline': [
+      pipeline: [
         {
-          '$match': {
-            '$expr': {
-              '$and': [
+          $match: {
+            $expr: {
+              $and: [
                 {
-                  '$in': [
-                    '$beaconId', '$$id'
-                  ]
-                }, {
-                  '$eq': [
-                    '$theatre', '$$theatre'
-                  ]
-                }
-              ]
-            }
-          }
-        }
+                  $in: ["$beaconId", "$$id"],
+                },
+                {
+                  $eq: ["$theatre", "$$theatre"],
+                },
+              ],
+            },
+          },
+        },
       ],
-      'as': 'beacons'
-    }
-  }, {
-    '$addFields': {
-      'airdromeData': {
-        'runways': {
-          '$map': {
-            'input': {
-              '$ifNull': [
-                '$raw.runways', []
-              ]
+      as: "beacons",
+    },
+  },
+  {
+    $addFields: {
+      airdromeData: {
+        runways: {
+          $map: {
+            input: {
+              $ifNull: ["$raw.runways", []],
             },
-            'as': 'run',
-            'in': '$$run.name'
-          }
+            as: "run",
+            in: "$$run.name",
+          },
         },
-        'ATC': {
-          '$ifNull': [
-            '$radio.frequency', []
-          ]
+        ATC: {
+          $ifNull: ["$radio.frequency", []],
         },
-        'TACAN': {
-          '$map': {
-            'input': {
-              '$filter': {
-                'input': '$beacons',
-                'as': 'be',
-                'cond': {
-                  '$eq': [
-                    '$$be.type_name', 'TACAN'
-                  ]
-                }
-              }
+        TACAN: {
+          $map: {
+            input: {
+              $filter: {
+                input: "$beacons",
+                as: "be",
+                cond: {
+                  $eq: ["$$be.type_name", "TACAN"],
+                },
+              },
             },
-            'as': 'be',
-            'in': '$$be.channel'
-          }
+            as: "be",
+            in: "$$be.channel",
+          },
         },
-        'ILS': {
-          '$map': {
-            'input': {
-              '$filter': {
-                'input': '$beacons',
-                'as': 'be',
-                'cond': {
-                  '$eq': [
-                    '$$be.type_name', 'ILS_GLIDESLOPE'
-                  ]
-                }
-              }
+        ILS: {
+          $map: {
+            input: {
+              $filter: {
+                input: "$beacons",
+                as: "be",
+                cond: {
+                  $eq: ["$$be.type_name", "ILS_GLIDESLOPE"],
+                },
+              },
             },
-            'as': 'be',
-            'in': '$$be.frequency'
-          }
-        }
-      }
-    }
-  }, {
-    '$unwind': {
-      'path': '$airdromeData.ATC',
-      'preserveNullAndEmptyArrays': true
-    }
-  }, {
-    '$addFields': {
-      'airdromeData': {
-        'ATC': {
-          '$map': {
-            'input': {
-              '$ifNull': [
-                '$airdromeData.ATC', []
-              ]
+            as: "be",
+            in: "$$be.frequency",
+          },
+        },
+      },
+    },
+  },
+  {
+    $unwind: {
+      path: "$airdromeData.ATC",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $addFields: {
+      airdromeData: {
+        ATC: {
+          $map: {
+            input: {
+              $ifNull: ["$airdromeData.ATC", []],
             },
-            'as': 'atc',
-            'in': {
-              '$arrayElemAt': [
-                '$$atc', 1
-              ]
-            }
-          }
-        }
-      }
-    }
-  }, {
-    '$unset': [
-      'raw', 'radio', 'beacons', 'attributes', 'category_name', 'life', 'category', 'WorldID', 'callsign', '_origin'
-    ]
-  }
+            as: "atc",
+            in: {
+              $arrayElemAt: ["$$atc", 1],
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    $unset: [
+      "raw",
+      "radio",
+      "beacons",
+      "attributes",
+      "category_name",
+      "life",
+      "category",
+      "WorldID",
+      "callsign",
+      "_origin",
+    ],
+  },
 ];
 
 module.exports = {
