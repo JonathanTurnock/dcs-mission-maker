@@ -184,7 +184,7 @@ const planeRoutePointSchema = z.object({
   alt: z.number().default(2000),
   type: z.string().default("Turning Point"),
   action: z.string().default("Turning Point"),
-  alt_type: z.string().default("BARO"),
+  alt_type: z.enum(["BARO", "RADIO"]).default("BARO"),
   y: zPosSchema,
   x: xPosSchema,
   speed_locked: z.boolean(),
