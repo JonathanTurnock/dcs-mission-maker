@@ -30,6 +30,10 @@ export const js2Lua = (data: any, depth = 0): string => {
     return data.toString();
   }
 
+  if (isString(data) && data.match(/^_\d+/)) {
+    return data.replace(/^_/, "")
+  }
+
   if (isString(data)) {
     return JSON.stringify(data);
   }
