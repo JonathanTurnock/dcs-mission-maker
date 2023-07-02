@@ -706,7 +706,7 @@ exports[`given a simple mission with 1 plane group should build a mission file 1
 											["pylons"]=
 											{
 											},
-											["fuel"]=5029,
+											["fuel"]="5029",
 											["flare"]=120,
 											["ammo_type"]=1,
 											["chaff"]=240,

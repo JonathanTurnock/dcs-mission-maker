@@ -12,7 +12,7 @@ describe("when generating a plane", () => {
         name: "Aerial-1-1",
         payload: {
           pylons: {},
-          fuel: 5029,
+          fuel: "5029",
           flare: 120,
           ammo_type: 1,
           chaff: 240,
@@ -48,7 +48,7 @@ describe("when generating a plane", () => {
         name: "Aerial-1-1",
         payload: {
           pylons: {},
-          fuel: 5029,
+          fuel: "5029",
           flare: 120,
           ammo_type: 1,
           chaff: 240,
@@ -72,7 +72,7 @@ describe("when generating a plane", () => {
       name: "Aerial-1-1",
       payload: {
         pylons: {},
-        fuel: 5029,
+        fuel: "5029",
         flare: 120,
         ammo_type: 1,
         chaff: 240,

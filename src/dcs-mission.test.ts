@@ -73,7 +73,7 @@ describe("given a simple mission with 1 plane group", () => {
                         name: "Aerial-1-1",
                         payload: {
                           pylons: {},
-                          fuel: 5029,
+                          fuel: "5029",
                           flare: 120,
                           ammo_type: 1,
                           chaff: 240,
