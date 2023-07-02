@@ -20,9 +20,13 @@ export const js2Lua = (data: any, depth = 0): string => {
     }
     return `\n${indentation}{\n${map(
       data,
-      (value, key) =>
+      (value, key, object) =>
         `${indentation}\t[${js2Lua(key)}]=${js2Lua(value, depth + 1)}`,
     ).join(",\n")}\n${indentation}}`;
+  }
+
+  if (isString(data) && data.match(/^_\d+/)) {
+    return data.replace(/^_/, "")
   }
 
   if (isString(data)) {
