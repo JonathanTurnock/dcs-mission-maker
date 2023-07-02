@@ -67,7 +67,7 @@ describe("given a simple mission with 1 plane group", () => {
                       plane({
                         type: "A-10A",
                         onboard_num: "010",
-                        callsign: [1, 1, 1],
+                        callsign: { _1: 1, _2: 1, _3: 1, name: "Enfield11" },
                         y: 635588.6,
                         x: -292598.45714286,
                         name: "Aerial-1-1",

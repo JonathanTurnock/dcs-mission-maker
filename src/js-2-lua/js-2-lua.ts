@@ -31,7 +31,7 @@ export const js2Lua = (data: any, depth = 0): string => {
   }
 
   if (isString(data) && data.match(/^_\d+/)) {
-    return data.replace(/^_/, "")
+    return data.replace(/^_/, "");
   }
 
   if (isString(data)) {

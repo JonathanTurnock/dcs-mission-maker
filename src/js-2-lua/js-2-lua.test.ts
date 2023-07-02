@@ -18,7 +18,7 @@ describe("js2Lua", () => {
       js2Lua([
         { id: 21, name: "Australia" },
         { id: 15, name: "Israel" },
-      ])
+      ]),
     ).toMatchSnapshot();
   });
 
@@ -31,7 +31,8 @@ describe("js2Lua", () => {
   });
 
   it("should convert object keys to int where number is prefixed with _", () => {
-    expect(js2Lua({ _1: 1, _2: 1, _3: 1, name: "Enfield11", _ignoreme: "hello" })).toMatchSnapshot();
+    expect(
+      js2Lua({ _1: 1, _2: 1, _3: 1, name: "Enfield11", _ignoreme: "hello" }),
+    ).toMatchSnapshot();
   });
-
 });

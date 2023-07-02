@@ -1,4 +1,4 @@
-import { plane } from "../src/files/mission";
+import { plane } from "../src";
 
 describe("when generating a plane", () => {
   it("should throw error if prop without default value is missing", () => {
@@ -6,7 +6,7 @@ describe("when generating a plane", () => {
       // @ts-ignore
       plane({
         onboard_num: "010",
-        callsign: [1, 1, 1],
+        callsign: { _1: 1, _2: 1, _3: 1, name: "Enfield11" },
         y: 635588.6,
         x: -292598.45714286,
         name: "Aerial-1-1",
@@ -42,7 +42,7 @@ describe("when generating a plane", () => {
       plane({
         type: "A-10A",
         onboard_num: "010",
-        callsign: [1, 1, 1],
+        callsign: { _1: 1, _2: 1, _3: 1, name: "Enfield11" },
         y: 635588.6,
         x: -292598.45714286,
         name: "Aerial-1-1",
@@ -66,7 +66,7 @@ describe("when generating a plane", () => {
       psi: 0,
       livery_id: "default",
       skill: "High",
-      callsign: [1, 1, 1],
+      callsign: { _1: 1, _2: 1, _3: 1, name: "Enfield11" },
       y: 635588.6,
       x: -292598.45714286,
       name: "Aerial-1-1",

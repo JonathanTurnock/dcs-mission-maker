@@ -160,7 +160,12 @@ const planeUnitSchema = z.object({
   psi: z.number().default(0),
   livery_id: z.string().default("default"),
   skill: z.string().default("High"),
-  callsign: z.array(z.number()).length(3),
+  callsign: z.object({
+    _1: z.number(),
+    _2: z.number(),
+    _3: z.number(),
+    name: z.string().nonempty(),
+  }),
   name: z.string(),
   payload: z.object({
     pylons: z.object({}),

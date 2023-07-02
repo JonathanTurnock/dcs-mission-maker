@@ -697,7 +697,8 @@ exports[`given a simple mission with 1 plane group should build a mission file 1
 										{
 											[1]=1,
 											[2]=1,
-											[3]=1
+											[3]=1,
+											["name"]="Enfield11"
 										},
 										["name"]="Aerial-1-1",
 										["payload"]=
