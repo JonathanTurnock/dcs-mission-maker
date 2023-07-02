@@ -19,7 +19,6 @@ describe("when generating a plane", () => {
           gun: 100,
         },
         speed: 123.33333333333,
-        AddPropAircraft: {},
         unitId: 1,
       }),
     ).toThrowErrorMatchingInlineSnapshot(`
@@ -55,7 +54,6 @@ describe("when generating a plane", () => {
           gun: 100,
         },
         speed: 123.33333333333,
-        AddPropAircraft: {},
         unitId: 1,
       }),
     ).toEqual({
@@ -80,7 +78,6 @@ describe("when generating a plane", () => {
       },
       speed: 123.33333333333,
       heading: 0,
-      AddPropAircraft: {},
       unitId: 1,
     });
   });

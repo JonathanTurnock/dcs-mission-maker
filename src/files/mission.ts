@@ -177,7 +177,6 @@ const planeUnitSchema = z.object({
   }),
   speed: z.number().describe("Aircraft speed in meters per second"),
   heading: z.number().default(0),
-  AddPropAircraft: z.object({}).default({}),
   unitId: z.number(),
 });
 

@@ -714,9 +714,6 @@ exports[`given a simple mission with 1 plane group should build a mission file 1
 										},
 										["speed"]=123.33333333333,
 										["heading"]=0,
-										["AddPropAircraft"]=
-										{
-										},
 										["unitId"]=1
 									}
 								},

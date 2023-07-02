@@ -80,7 +80,6 @@ describe("given a simple mission with 1 plane group", () => {
                           gun: 100,
                         },
                         speed: 123.33333333333,
-                        AddPropAircraft: {},
                         unitId: 1,
                       }),
                     ],

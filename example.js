@@ -64,7 +64,6 @@ const dcsMission = new DcsMission({
                       gun: 100,
                     },
                     speed: 123.33333333333,
-                    AddPropAircraft: {},
                     unitId: 1,
                   }),
                 ],
