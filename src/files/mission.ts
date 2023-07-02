@@ -171,7 +171,7 @@ const planeUnitSchema = z.object({
     pylons: z.object({}),
     fuel: z.string(),
     flare: z.number(),
-    ammo_type: z.number(),
+    ammo_type: z.number().optional(),
     chaff: z.number(),
     gun: z.number(),
   }),
