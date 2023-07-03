@@ -1,0 +1,71 @@
+{
+  "communication": true,
+  "frequency": 124,
+  "groupId": 2,
+  "hidden": false,
+  "modulation": 0,
+  "name": "Aerial-2",
+  "radioSet": false,
+  "route": {
+    "points": [
+      {
+        "action": "Landing",
+        "airdromeId": 31,
+        "alt": 465,
+        "alt_type": "BARO",
+        "ETA": 0,
+        "ETA_locked": true,
+        "formation_template": "",
+        "speed": 138.88888888889,
+        "speed_locked": true,
+        "task": {
+          "id": "ComboTask",
+          "params": {
+            "tasks": []
+          }
+        },
+        "type": "Land",
+        "x": -319064.875,
+        "y": 903148.53125
+      }
+    ]
+  },
+  "start_time": 0,
+  "task": "CAS",
+  "tasks": [],
+  "uncontrolled": false,
+  "units": [
+    {
+      "alt": 465,
+      "alt_type": "BARO",
+      "callsign": {
+        "_1": 2,
+        "_2": 1,
+        "_3": 1,
+        "name": "Springfield11"
+      },
+      "heading": 0,
+      "livery_id": "abkhazian air force",
+      "name": "Aerial-2-1",
+      "onboard_num": "011",
+      "parking_landing": 89,
+      "parking_landing_id": "01",
+      "payload": {
+        "chaff": 128,
+        "flare": 128,
+        "fuel": "2835",
+        "gun": 100,
+        "pylons": []
+      },
+      "psi": 0,
+      "skill": "High",
+      "speed": 138.88888888889,
+      "type": "Su-25",
+      "unitId": 3,
+      "x": -319064.875,
+      "y": 903148.53125
+    }
+  ],
+  "x": -319064.875,
+  "y": 903148.53125
+}

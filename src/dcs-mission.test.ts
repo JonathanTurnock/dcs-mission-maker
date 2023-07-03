@@ -56,7 +56,7 @@ describe("given a simple mission with 1 plane group", () => {
                           task: {
                             id: "ComboTask",
                             params: {
-                              tasks: {},
+                              tasks: [],
                             },
                           },
                           ETA: 0,

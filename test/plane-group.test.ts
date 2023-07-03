@@ -55,7 +55,7 @@ describe("when generating a plane group", () => {
               task: {
                 id: "ComboTask",
                 params: {
-                  tasks: {},
+                  tasks: [],
                 },
               },
               ETA: 0,
@@ -104,7 +104,7 @@ describe("when generating a plane group", () => {
             task: {
               id: "ComboTask",
               params: {
-                tasks: {},
+                tasks: [],
               },
             },
             ETA: 0,

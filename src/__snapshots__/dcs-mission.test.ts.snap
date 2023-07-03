@@ -655,16 +655,15 @@ exports[`given a simple mission with 1 plane group should build a mission file 1
 									{
 										[1]=
 										{
-											["alt"]=2000,
-											["type"]="Turning Point",
 											["action"]="Turning Point",
+											["type"]="Turning Point",
+											["alt"]=2000,
 											["alt_type"]="BARO",
-											["y"]=632449.86255341,
-											["x"]=-297153.83834764,
-											["speed_locked"]=true,
+											["ETA"]=0,
+											["ETA_locked"]=true,
 											["formation_template"]="",
 											["speed"]=154.16666666667,
-											["ETA_locked"]=true,
+											["speed_locked"]=true,
 											["task"]=
 											{
 												["id"]="ComboTask",
@@ -675,7 +674,8 @@ exports[`given a simple mission with 1 plane group should build a mission file 1
 													}
 												}
 											},
-											["ETA"]=0
+											["x"]=-297153.83834764,
+											["y"]=632449.86255341
 										}
 									}
 								},

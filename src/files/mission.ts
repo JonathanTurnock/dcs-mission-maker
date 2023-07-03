@@ -180,23 +180,71 @@ const planeUnitSchema = z.object({
   unitId: z.number(),
 });
 
-const planeRoutePointSchema = z.object({
+export const abstractRoutePointSchema = z.object({
+  action: z.string(),
+  type: z.string(),
   alt: z.number().default(2000),
-  type: z.string().default("Turning Point"),
-  action: z.string().default("Turning Point"),
-  alt_type: z.enum(["BARO", "RADIO"]).default("BARO"),
-  y: zPosSchema,
-  x: xPosSchema,
-  speed_locked: z.boolean(),
-  formation_template: z.string(),
+  alt_type: z.union([z.literal("BARO"), z.literal("RADIO")]).default("BARO"),
+  ETA: z.number().default(0),
+  ETA_locked: z.boolean().default(true),
+  formation_template: z.string().default(""),
   speed: z.number(),
-  ETA_locked: z.boolean(),
+  speed_locked: z.boolean(),
   task: z.object({
-    id: z.string(),
-    params: z.object({ tasks: z.object({}) }),
+    id: z.literal("ComboTask"),
+    params: z.object({
+      tasks: z.array(z.object({})).default([]),
+    }),
   }),
-  ETA: z.number(),
+  x: z.number(),
+  y: z.number(),
 });
+
+export const takeOffFromParkingColdRoutePointSchema =
+  abstractRoutePointSchema.extend({
+    action: z.literal("From Parking Area"),
+    type: z.literal("TakeOffParking"),
+    airdromeId: z.number(),
+  });
+
+export const takeOffFromRunwayRoutePointSchema =
+  abstractRoutePointSchema.extend({
+    action: z.literal("From Runway"),
+    type: z.literal("TakeOff"),
+    airdromeId: z.number(),
+  });
+
+export const takeOffFromParkingHotRoutePointSchema =
+  abstractRoutePointSchema.extend({
+    action: z.literal("From Parking Area Hot"),
+    type: z.literal("TakeOffParkingHot"),
+    airdromeId: z.number(),
+  });
+
+export const turningPointRoutePointSchema = abstractRoutePointSchema.extend({
+  action: z.literal("Turning Point"),
+  type: z.literal("Turning Point"),
+});
+
+export const flyOverPointRoutePointSchema = abstractRoutePointSchema.extend({
+  action: z.literal("Fly Over Point"),
+  type: z.literal("Turning Point"),
+});
+
+export const landingRoutePointSchema = abstractRoutePointSchema.extend({
+  action: z.literal("Landing"),
+  type: z.literal("Land"),
+  airdromeId: z.number(),
+});
+
+const anyRoutePointSchema = z.union([
+  takeOffFromParkingColdRoutePointSchema,
+  takeOffFromRunwayRoutePointSchema,
+  takeOffFromParkingHotRoutePointSchema,
+  turningPointRoutePointSchema,
+  flyOverPointRoutePointSchema,
+  landingRoutePointSchema,
+]);
 
 const planeGroupSchema = z.object({
   frequency: z.number().default(124),
@@ -206,7 +254,7 @@ const planeGroupSchema = z.object({
   x: xPosSchema,
   tasks: z.object({}).default({}),
   route: z.object({
-    points: z.array(planeRoutePointSchema).default([]),
+    points: z.array(anyRoutePointSchema).default([]),
   }),
   hidden: z.boolean().default(false),
   units: z.array(planeUnitSchema).min(1).max(4),
