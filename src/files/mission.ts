@@ -272,7 +272,7 @@ const coalitionCountrySchema = z.object({
   plane: z.object({
     group: z.array(planeGroupSchema).default([]),
   }),
-  vehicle: z.any(),
+  vehicle: z.object({}).passthrough(),
 });
 
 const coalitionSchema = z.object({
