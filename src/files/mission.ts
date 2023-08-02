@@ -193,7 +193,7 @@ export const abstractRoutePointSchema = z.object({
   task: z.object({
     id: z.literal("ComboTask"),
     params: z.object({
-      tasks: z.array(z.object({})).default([]),
+      tasks: z.array(z.object({}).passthrough()).default([]),
     }),
   }),
   x: z.number(),
