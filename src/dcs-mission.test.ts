@@ -18,6 +18,7 @@ describe("given a simple empty mission", () => {
 describe("given a simple mission with 1 plane group", () => {
   it("should build a mission file", () => {
     const dcsMission = new DcsMission({
+      trigrules: undefined,
       theatre: "Caucasus",
       descriptionNeutralsTask: "",
       descriptionRedTask: "",
@@ -32,6 +33,7 @@ describe("given a simple mission with 1 plane group", () => {
             {
               id: 80,
               name: "CJTF Blue",
+              vehicle: { group: [] },
               plane: {
                 group: [
                   planeGroup({

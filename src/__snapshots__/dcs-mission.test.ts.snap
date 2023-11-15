@@ -725,6 +725,12 @@ exports[`given a simple mission with 1 plane group should build a mission file 1
 								["uncontrolled"]=false
 							}
 						}
+					},
+					["vehicle"]=
+					{
+						["group"]=
+						{
+						}
 					}
 				}
 			}

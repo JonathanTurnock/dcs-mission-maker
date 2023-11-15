@@ -10,9 +10,7 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "lint": "rome format . --write && rome check .",
-    "prebuild": "npm run build:data && rimraf dist && npm run lint",
     "build": "tsc",
-    "build:data": "node data/build.js && prettier --write src/me_db.ts data/me_db.bundle.json",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
