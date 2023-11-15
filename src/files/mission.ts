@@ -266,13 +266,47 @@ const planeGroupSchema = z.object({
   uncontrolled: z.boolean().default(false),
 });
 
+const vehicleUnitSchema = z.object({
+  y: zPosSchema,
+  x: xPosSchema,
+  type: z.string(),
+  skill: z.string().default("Average"),
+  name: z.string(),
+  heading: z.number().default(0),
+  unitId: z.number(),
+  playerCanDrive: z.boolean().default(true),
+  coldAtStart: z.boolean().default(false),
+});
+
+const vehicleGroupSchema = z.object({
+  groupId: z.number(),
+  name: z.string(),
+  visible: z.boolean().default(false),
+  uncontrollable: z.boolean().default(false),
+  tasks: z.object({}).default({}),
+  task: z.string().default("Ground Nothing"),
+  taskSelected: z.boolean().default(true),
+  hidden: z.boolean().default(false),
+  start_time: z.number().default(0),
+
+  y: zPosSchema,
+  x: xPosSchema,
+  route: z.object({
+    spans: z.object({}).default({}),
+    points: z.array(anyRoutePointSchema).default([]),
+  }),
+  units: z.array(vehicleUnitSchema).min(1),
+});
+
 const coalitionCountrySchema = z.object({
   id: z.number(),
   name: z.string(),
   plane: z.object({
     group: z.array(planeGroupSchema).default([]),
   }),
-  vehicle: z.object({}).passthrough().optional(),
+  vehicle: z.object({
+    group: z.array(vehicleGroupSchema).default([]),
+  }),
 });
 
 const coalitionSchema = z.object({
@@ -351,9 +385,26 @@ export const missionSchema = z.object({
 export type MissionProps = z.input<typeof missionSchema>;
 export const mission = (props: MissionProps) => missionSchema.parse(props);
 
+export type Mission = z.infer<typeof missionSchema>;
+
 export type PlaneProps = z.input<typeof planeUnitSchema>;
 export const plane = (props: PlaneProps) => planeUnitSchema.parse(props);
+
+export type Plane = z.infer<typeof planeUnitSchema>;
 
 export type PlaneGroupProps = z.input<typeof planeGroupSchema>;
 export const planeGroup = (props: PlaneGroupProps) =>
   planeGroupSchema.parse(props);
+
+export type PlaneGroup = z.infer<typeof planeGroupSchema>;
+
+export type VehicleProps = z.input<typeof vehicleUnitSchema>;
+export const vehicle = (props: VehicleProps) => vehicleUnitSchema.parse(props);
+
+export type Vehicle = z.infer<typeof vehicleUnitSchema>;
+
+export type VehicleGroupProps = z.input<typeof vehicleGroupSchema>;
+export const vehicleGroup = (props: VehicleGroupProps) =>
+  vehicleGroupSchema.parse(props);
+
+export type VehicleGroup = z.infer<typeof vehicleGroupSchema>;
